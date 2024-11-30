@@ -1,4 +1,7 @@
 # Guilty Gear Xrd x SAMMI
+
+A supplementary extension for [ggxrd-mod](https://github.com/super-continent/ggxrd-mod).
+
 Connect to Xrd, Do Crimes! A Bridge Extension for Sammi in their .sef javascript format. Allows you to connect to [super-continent's ggxrd-mod](https://github.com/super-continent/ggxrd-mod).
 
 Simply install as a Bridge Extension inside SAMMI, and run Guilty Gear Xrd to automatically connect.
