@@ -6,7 +6,7 @@ A Bridge Extension for [SAMMI](https://sammi.solutions). It allows you to receiv
 
 Step 1: Download [SAMMI](https://sammi.solutions).
 
-Step 2: Follow the various [SAMMI Tutorials](https://sammi.solutions/docs/getting-started/step-by-step).
+Step 2: Follow the various [SAMMI Onboarding Tutorials](https://sammi.solutions/docs/getting-started/step-by-step).
 
 Step 3: Install Guilty Gear Xrd x SAMMI as a [SAMMI Bridge](https://sammi.solutions/docs/bridge) Extension.
 
