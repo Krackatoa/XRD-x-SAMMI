@@ -24,6 +24,11 @@ After installing, you can access the live datastream by referencing it directly 
 | `Xrd_data.data.data.current_frame` | Retrieves the current frame. |
 | `Xrd_Data.data.data.player_2.steam_id` | Retrieves the Steam ID for the P2 slot. Netplay Only. Outside of netplay it always returns `0`. |
 
+### Triggering Buttons via the per-frame update
+Some buttons want to run logic on every frame of gameplay. Because we currently use a workaround to support the full 60FPS data stream, there is no Extension Trigger that can perform this.
+
+Inside the button of ID `Xrd_Triggers`, insert the `Trigger Button` command in the appropriate field, with the variable set to whatever button you would like to trigger in time with the incoming data stream.
+
 ### Accessing Events via Extension Triggers
 The following Extension Triggers are available for use. Add them to buttons via a button's Trigger menu. They all contain extremely relevant data within that can be accessed via the `Trigger Pull Button` command.
 
