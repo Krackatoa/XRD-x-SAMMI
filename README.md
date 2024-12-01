@@ -1,6 +1,6 @@
 # Guilty Gear Xrd x SAMMI
 
-A Bridge Extension for [SAMMI](https://sammi.solutions). It allows you to receive data from [ggxrd-mod](https://github.com/super-continent/ggxrd-mod). 
+A Bridge Extension for [SAMMI](https://sammi.solutions). It allows you to receive data from [ggxrd-mod](https://github.com/super-continent/ggxrd-mod) in the form of a button that fills with data at 60Hz, and Extension Triggers for individual, one-off events. It's currently separated into these two mechanisms for performance reasons. The data stream to the button may become an Extension Trigger of it's own at a later date.
 
 ## Quick Start Guide
 
