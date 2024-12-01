@@ -41,6 +41,10 @@ The following Extension Triggers are available for use. Add them to buttons via 
 | `ggxrd_comboEndEvent` | Combo Summary! Corrals all the data from the last combo. |
 | `ggxrd_gamestateDeinitialized` | Triggers when you leave a match or the application closes mid-match. |
 
+### Example of Detecting Level 3 Mist Finer.
+This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger.
+![image](https://github.com/user-attachments/assets/50741a4c-6f03-4601-b677-6ed87b04acd5)
+
 ## More Information
 
 Check out [the Xrd Websocket mod](https://github.com/super-continent/ggxrd-mod) for more information.
