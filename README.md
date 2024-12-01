@@ -42,7 +42,7 @@ The following Extension Triggers are available for use. Add them to buttons via 
 | `ggxrd_gamestateDeinitialized` | Triggers when you leave a match or the application closes mid-match. |
 
 ### Example of Detecting Level 3 Mist Finer.
-This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger.
+This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger. The ggxrd_hitEvent trigger sends along it's own data object, separate from the one in the `Xrd_Data` button.
 ![image](https://github.com/user-attachments/assets/50741a4c-6f03-4601-b677-6ed87b04acd5)
 
 ## More Information
