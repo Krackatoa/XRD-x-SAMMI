@@ -18,24 +18,23 @@ Step 5: Access the Xrd_Data button for gamestate info, and make use of the vario
 ### Accessing the per-frame update
 After installing, you can access the live datastream by referencing it directly in your commands. A reference to datastream Variables will look like:
 
-Xrd_data.data.data.player_1.character
-Xrd_data.data.data.current_frame
-Xrd_Data.data.data.player_2.input_state.down
+| Example | Description |
+| --- | --- |
+| `Xrd_data.data.data.player_1.character` | Retrieves the current character in P1 slot. |
+| `Xrd_data.data.data.current_frame` | Retrieves the current frame. |
+| `Xrd_Data.data.data.player_2.steam_id` | Retrieves the Steam ID for the P2 slot. Netplay Only. Outside of netplay it always returns `0`. |
 
 ### Accessing Events via Extension Triggers
 The following Extension Triggers are available for use:
 
-ggxrd_hitEvent
-
-ggxrd_objectCreatedEvent
-
-ggxrd_roundStartEvent
-
-ggxrd_roundEndEvent
-
-ggxrd_comboEndEvent
-
-ggxrd_gamestateDeinitialized
+| Extension Trigger | Description |
+| --- | --- |
+| `ggxrd_hitEvent` | Occurs on Hit or Block. Contains relevant data. |
+| `ggxrd_objectCreatedEvent` | Triggers on Object Generation. These can be logic objects, projectiles or special effects. |
+| `ggxrd_roundStartEvent` | Triggers on Round Start. |
+| `ggxrd_roundEndEvent` | Triggers on Round End. |
+| `ggxrd_comboEndEvent` | Combo Summary! Corrals all the data from the last combo. |
+| `ggxrd_gamestateDeinitialized` | Triggers when you leave a match or the application closes mid-match. |
 
 Attach these by adding Extension Triggers from with a Button's Trigger menu. Access the data sent alongside these Extension Triggers with the Trigger Pull Data command.
 
