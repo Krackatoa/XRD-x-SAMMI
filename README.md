@@ -25,7 +25,7 @@ After installing, you can access the live datastream by referencing it directly 
 | `Xrd_Data.data.data.player_2.steam_id` | Retrieves the Steam ID for the P2 slot. Netplay Only. Outside of netplay it always returns `0`. |
 
 ### Accessing Events via Extension Triggers
-The following Extension Triggers are available for use:
+The following Extension Triggers are available for use. Add them to buttons via a button's Trigger menu. They all contain extremely relevant data within that can be accessed via the `Trigger Pull Button` command.
 
 | Extension Trigger | Description |
 | --- | --- |
@@ -35,8 +35,6 @@ The following Extension Triggers are available for use:
 | `ggxrd_roundEndEvent` | Triggers on Round End. |
 | `ggxrd_comboEndEvent` | Combo Summary! Corrals all the data from the last combo. |
 | `ggxrd_gamestateDeinitialized` | Triggers when you leave a match or the application closes mid-match. |
-
-Attach these by adding Extension Triggers from with a Button's Trigger menu. Access the data sent alongside these Extension Triggers with the Trigger Pull Data command.
 
 ## More Information
 
