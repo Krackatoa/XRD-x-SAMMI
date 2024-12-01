@@ -9,8 +9,8 @@ With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd:
 <script>
     const Xrd_Websocket_Names = [];
     const Xrd_Websockets = [];
-	var Xrd_Data = "";
-	var Xrd_Connected = 0;
+	let Xrd_Data = "";
+	let Xrd_Connected = 0;
 	
 </script>
 <div class="row">
@@ -19,7 +19,8 @@ With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd:
       <div class="card-header">
         <h3>Guilty Gear Xrd x Sammi</h3>
         <div class="d-flex justify-content-between align-items-center">
-          <h5>Version: 1.0</h5>
+		<h5><div id="connection-status">Connection: OFF</div></h5>
+          <h5>Version: 1.0</h5> 
           <a href="https://github.com/super-continent/ggxrd-mod/" class="btn btn-dark" target="_blank" rel="noopener noreferrer">Download Mod Here</a>
         </div>
       </div>
@@ -133,6 +134,8 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
 				
 				if(Xrd_Connected == 0)
 				{
+					let connectionStatusElement = document.getElementById('connection-status');
+					connectionStatusElement.textContent = 'Connection: ON';
 					SAMMI.alert('Xrd has connected!');
 					Xrd_Connected = 1;
 				}
@@ -147,6 +150,8 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
 					{
 						SAMMI.alert('Xrd has disconnected!');
 						Xrd_Connected = 0;
+						let connectionStatusElement = document.getElementById('connection-status');
+						connectionStatusElement.textContent = 'Connection: OFF';
 					}					
 					websocketRemove(Xrd_Websocket_Names[i]);
 					Xrd_Websocket_Names.splice(i, 1);
