@@ -43,7 +43,32 @@ The following Extension Triggers are available for use. Add them to buttons via 
 
 ### Example of Detecting Level 3 Mist Finer.
 This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger. The ggxrd_hitEvent trigger sends along it's own data object, separate from the one in the `Xrd_Data` button.
+
 ![image](https://github.com/user-attachments/assets/50741a4c-6f03-4601-b677-6ed87b04acd5)
+
+### Example of Detecting if a character is Blitzing on a given frame.
+
+This is in the Commands screen of a button with no Extension Trigger. If you look closely, the commands reference the current character state in the data stream via `Xrd_Data.data.data.player_1.state`
+
+Adding the variable `is_blitzing` to the Init Variables:
+
+![image](https://github.com/user-attachments/assets/4f4bf3c1-f059-419d-89ea-a1559de68cb3)
+
+![image](https://github.com/user-attachments/assets/59d644c5-f61e-42b3-b396-d8c25eb0db8c)
+
+Adding the button logic to detect a valid Blitz state on P1 side:
+
+![image](https://github.com/user-attachments/assets/aa377c0c-05eb-4fb9-ae33-a5a051509703)
+
+In order for this button to run on every frame, we need to add it to the `Xrd_Triggers` button provided in the Extension deck.
+
+The `Xrd_Triggers` Button:
+
+![image](https://github.com/user-attachments/assets/a47944e4-2734-4fd9-8c75-557c19401a15)
+
+Inside the `Xrd_Triggers` Button:
+
+![image](https://github.com/user-attachments/assets/82af8219-add4-47f0-b71b-e56a967d55a5)
 
 ## More Information
 
