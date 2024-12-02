@@ -41,7 +41,7 @@ The following Extension Triggers are available for use. Add them to buttons via 
 | `ggxrd_roundStartEvent` | Triggers on Round Start. |
 | `ggxrd_roundEndEvent` | Triggers on Round End. |
 | `ggxrd_comboEndEvent` | Combo Summary! Corrals all the data from the last combo. |
-| `ggxrd_gamestateDeinitialized` | Triggers when you leave a match or the application closes mid-match. |
+| `ggxrd_gamestateDeinitializedEvent` | Triggers when you leave a match or the application closes mid-match. |
 
 ### Example of Detecting Level 3 Mist Finer.
 This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger. The ggxrd_hitEvent trigger sends along it's own data object, separate from the one in the `Xrd_Data` button.
@@ -74,4 +74,4 @@ Inside the `Xrd_Triggers` Button:
 
 ## More Information
 
-Check out [the Xrd Websocket mod](https://github.com/super-continent/ggxrd-mod) for more information.
+Check out the documentation for [Pangaea's Mod](https://github.com/super-continent/ggxrd-mod) for more information.
