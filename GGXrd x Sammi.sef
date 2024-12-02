@@ -3,9 +3,8 @@ Guilty Gear Xrd x Sammi
 [extension_info]
 With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd: Rev 2 (Steam Version) directly into Sammi.
 [extension_version]
-1.0
+1.0c
 [insert_external]
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     const Xrd_Websocket_Names = [];
     const Xrd_Websockets = [];
@@ -20,7 +19,7 @@ With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd:
         <h3>Guilty Gear Xrd x Sammi</h3>
         <div class="d-flex justify-content-between align-items-center">
 		<h5><div id="connection-status">Connection: OFF</div></h5>
-          <h5>Version: 1.0</h5> 
+          <h5>Version: 1.0c</h5> 
           <a href="https://github.com/super-continent/ggxrd-mod/" class="btn btn-dark" target="_blank" rel="noopener noreferrer">Download Mod Here</a>
         </div>
       </div>
@@ -36,7 +35,7 @@ With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd:
 		<i>ggxrd_comboEndEvent</i> - On Combo End.<br><br>
 		<i>ggxrd_roundStartEvent</i> - On Round Start.<br><br>
 		<i>ggxrd_roundEndEvent</i> - On Round End.<br><br>
-		<i>ggxrd_gamestateDeinitialized</i> - Dedicated event for when you leave gameplay.</p>
+		<i>ggxrd_gamestateDeinitializedEvent</i> - Dedicated event for when you leave gameplay.</p>
 		<p>Note: These triggers only occur during gameplay.</p>
 		<hr>
 		<h4 class="card-title">Bonus Functionality</h4>
@@ -81,7 +80,6 @@ SAMMI.extCommand('Remove Xrd Websocket', 3355443, 52, {
     name: ['unique name for websocket', 14, '', 1]
 });
 
-
 SAMMI.extCommand('Send Message To Xrd Websocket', 3355443, 52, {
     name: ['unique name for websocket', 14, 'xturd', 1],
     msg: ['message for websocket', 14, 'xturd', 1],
@@ -95,11 +93,6 @@ SAMMI.extCommand('Xrd Moveset Interpreter', 3355443, 52, {
 	state: ['Character State', 14, '', 1],
 	returnVariable: ['Return Variable', 14, '', 1],
 });
-
-/*SAMMI.extCommand('Upload to Imgur', 3355443, 52, {
-	filepath: ['File Path', 14, '', 1],
-	returnVariable: ['Return',14,'',1]
-});*/
 
 //SAMMI.extCommand('Print All Xrd Connections', 3355443, 30);
 
@@ -170,11 +163,10 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
 			
             Xrd_Websockets[i].onmessage = function (event) {
                 if (msg) {
-					//This is where you set up the logic for incoming info.
 					
-					
+					//This is where you set up the logic for incoming info.					
 					obj = JSON.parse(event.data);
-					//if(obj.event == "ggxrd_stateUpdate" && obj.data.current_frame % 2 == 0)
+					
 					if(obj.event == "ggxrd_stateUpdate")
 					{
 						SAMMI.setVariable("data", obj, Xrd_Data);
@@ -202,16 +194,16 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
 					{
 						SAMMI.triggerExt('ggxrd_comboEndEvent', {data: obj});
 					}
-					else if(obj.event == "ggxrd_gamestateDeinitialized")
+					else if(obj.event == "ggxrd_gamestateDeinitializedEvent")
 					{
-						SAMMI.triggerExt('ggxrd_gamestateDeinitialized', {data: obj});
+						
+						SAMMI.triggerExt('ggxrd_gamestateDeinitializedEvent', {data: obj});
 					} else
 					{
+						//SAMMI.alert(obj.event);
 						SAMMI.triggerExt('ggxrd_unknownEvent', {data: obj});
 					}
-					
                 }
-				
             };
         } else {
             throw 'Xrd is already connected: ' + name;
@@ -314,19 +306,6 @@ function main() {
 	sammiclient.on('Print All Xrd Connections', (payload) => {
 		printAllConnections();
 	});
-/*	
-	sammiclient.on('Xrd CSV Moveset Interpreter', (payload) => {
-		const { FromButton } = payload.Data;
-		const state = playload.Data.state;
-		SAMMI.SetVariable('input', state, 'Xrd_CSV_Moveset_Interpreter');
-		SAMMI.SetVariable('
-		SAMMI.triggerButton('Xrd_CSV_Moveset_Interpreter');	
-	}
-	
-	sammiclient.on('Xrd CSV Moveset Processor', (payload) =>
-	{
-		const { FromButton } = payload.Data;
-	}*/
 	
 	sammiclient.on('Xrd Moveset Interpreter', (payload) => {
 		const { FromButton } = payload.Data;
@@ -384,8 +363,7 @@ function main() {
 			case "zato": character = "Zato"; break;
 			default: character = "all"; break;
 		}
-		
-		
+
 			//Universal & Common States
 			
 		if (state.includes("CmnAct"))
