@@ -3,7 +3,7 @@ Guilty Gear Xrd x Sammi
 [extension_info]
 With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd: Rev 2 (Steam Version) directly into Sammi.
 [extension_version]
-1.0c
+1.1
 [insert_external]
 <script>
     const Xrd_Websocket_Names = [];
@@ -18,14 +18,15 @@ With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd:
       <div class="card-header">
         <h3>Guilty Gear Xrd x Sammi</h3>
         <div class="d-flex justify-content-between align-items-center">
-		<h5><div id="connection-status">Connection: OFF</div></h5>
-          <h5>Version: 1.0c</h5> 
-          <a href="https://github.com/super-continent/ggxrd-mod/" class="btn btn-dark" target="_blank" rel="noopener noreferrer">Download Mod Here</a>
+		<h5><div id="xrd-connection-status">Connection: OFF</div></h5>
+          <h5>Version: 1.1</h5> 
+          <a href="https://github.com/super-continent/ggxrd-mod/" class="btn btn-dark" target="_blank" rel="noopener noreferrer">Download Pangaea's Mod Here</a>
         </div>
       </div>
       <div class="card-body">
         <h4 class="card-title">Overview</h4>
-        <p class="card-text">Trigger Sammi events from Xrd. <br>Made possible by Pangaea's Guilty Gear Rev2 Hook.</p>
+        <p class="card-text">Trigger Sammi events from Xrd. </p>
+		<p>Made possible by Pangaea's Guilty Gear Rev2 Hook.</p>
         <hr>
 		<h4 class="card-title">Instructions</h4>
 		<p>Connect to Xrd via the <i>Create Xrd Websocket</i> command, then make use of the following Extension Triggers, paired with the <i>Trigger Pull Data</i> command:</p>
@@ -62,31 +63,16 @@ With Pangaea's Rev2Mod installed, pipe live gamestate data from Guilty Gear Xrd:
   </div>
 </div>
 [insert_command]
-// Create an example command for the extension
-/*
-SAMMI.extCommand('Guilty Gear Xrd Data', 3355443, 52, {
-    exampleBox: ['Save Xrd As', 14, 'a_frame_of_xrd']
-});*/
+
 SAMMI.extCommand('Create Xrd Websocket', 3355443, 52, {
-    name: ['Choose Your Websocket Name', 14, 'xturd', 1],
+    name: ['Choose Your Websocket Name', 14, 'xrd_websocket', 1],
     url: ['Websocket URL (Xrd Webserver)', 14, 'ws://localhost:6651', 1],
     buttonID: ['Data Button', 14, 'Xrd_Data', 1],
     status: ['status variable', 14, '', 1],
     error: ['error variable', 14, '', 1],
     msg: ['message variable', 14, '', 1]
 });
-/*
-SAMMI.extCommand('Remove Xrd Websocket', 3355443, 52, {
-    name: ['unique name for websocket', 14, '', 1]
-});
 
-SAMMI.extCommand('Send Message To Xrd Websocket', 3355443, 52, {
-    name: ['unique name for websocket', 14, 'xturd', 1],
-    msg: ['message for websocket', 14, 'xturd', 1],
-    rsp: ['save response as variable', 14, 'response', 1],
-    buttonID: ['button variable belongs to', 14, 'test', 1]
-});
-*/
 SAMMI.extCommand('Xrd Moveset Interpreter', 3355443, 52, {
 	mode:['Mode', 19, 'Real Name', null,['Real Name','Numpad','TTS Friendly']],
 	character: ['Character Filter', 20, 'all', null,['all','Answer','Axl','Baiken','Bedman','Chipp','Dizzy','Elphelt','Faust','Ino','JackO','Jam','Johnny','Kum','Ky','Leo','May','Millia','Potemkin','Ramlethal','Raven','Sin','Slayer','Sol','Venom','Zato-1'] ,1],
@@ -94,13 +80,11 @@ SAMMI.extCommand('Xrd Moveset Interpreter', 3355443, 52, {
 	returnVariable: ['Return Variable', 14, '', 1],
 });
 
-//SAMMI.extCommand('Print All Xrd Connections', 3355443, 30);
-
 // Call the main function when the extension loads
-main();
+Xrd_Main();
 [insert_hook]
 [insert_script]
-async function websocketCreate(name, url, buttonID, status, error, msg) {
+async function Xrd_CreateWebsocket(name, url, buttonID, status, error, msg) {
    try {
 		
         if (!name) {
@@ -113,28 +97,28 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
             throw 'Websocket: buttonID field is not optional!';
         }
 
-        let nameExists = Xrd_Websocket_Names.indexOf(name);
+        let xrd_name_exists = Xrd_Websocket_Names.indexOf(name);
 		
-        if (nameExists == -1) {
+        if (xrd_name_exists == -1) {
             Xrd_Websocket_Names.push(name);
             let i = Xrd_Websocket_Names.indexOf(name);
             Xrd_Websockets[i] = new WebSocket(url);
             Xrd_Websockets[i].onopen = function (event) {
-                //printAllConnections();
+            
                 if (status) {
                     SAMMI.setVariable(status, "connected", "Xrd_Connect");
                 }
 				
 				if(Xrd_Connected == 0)
 				{
-					let connectionStatusElement = document.getElementById('connection-status');
-					connectionStatusElement.textContent = 'Connection: ON';
+					xrd_connectionStatusElement = document.getElementById('xrd-connection-status');
+					xrd_connectionStatusElement.textContent = 'Connection: ON';
 					SAMMI.alert('Xrd has connected!');
+					console.log('Xrd has connected!');
 					Xrd_Connected = 1;
 				}
-					
-                
             };
+			
             Xrd_Websockets[i].onclose = function (event) {
                 if (status) 
 				{
@@ -142,23 +126,23 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
 					if(Xrd_Connected == 1)
 					{
 						SAMMI.alert('Xrd has disconnected!');
+						console.log('Xrd has disconnected!');
 						Xrd_Connected = 0;
-						let connectionStatusElement = document.getElementById('connection-status');
-						connectionStatusElement.textContent = 'Connection: OFF';
+						xrd_connectionStatusElement = document.getElementById('xrd-connection-status');
+						xrd_connectionStatusElement.textContent = 'Connection: OFF';
 					}					
-					websocketRemove(Xrd_Websocket_Names[i]);
+					Xrd_RemoveWebsocket(Xrd_Websocket_Names[i]);
 					Xrd_Websocket_Names.splice(i, 1);
 					SAMMI.triggerButton("Xrd_Connect");
 				}
 				
-                //printAllConnections();
+                
             };
-            Xrd_Websockets[i].onerror = function (event) {
-                //document.getElementById('websocket-errors').innerHTML = 'Error with ' + name + '.';
+			
+            Xrd_Websockets[i].onerror = function (event) {               
                 if (error) {
                     SAMMI.setVariable(error, event, "Xrd_Connect");
-                }
-                //SAMMI.alert('websocket ' + name + ' has had an error.');
+                }               
             };
 			
             Xrd_Websockets[i].onmessage = function (event) {
@@ -200,60 +184,20 @@ async function websocketCreate(name, url, buttonID, status, error, msg) {
 						SAMMI.triggerExt('ggxrd_gamestateDeinitializedEvent', {data: obj});
 					} else
 					{
-						//SAMMI.alert(obj.event);
 						SAMMI.triggerExt('ggxrd_unknownEvent', {data: obj});
 					}
                 }
             };
         } else {
-            throw 'Xrd is already connected: ' + name;
+            throw 'Xrd could not connect: ' + name;
         } 
 
     } catch (e) {
-        SAMMI.alert(e);
+        console.log(e);
     }
 }
 
-async function websocketMessage(name, msg, rsp, buttonID) {
-    try {
-
-        if (!name) {
-            throw 'Websocket: name field is not optional!';
-        } else if (!msg) {
-            throw 'Websocket: message field is not optional!';
-        } else if (!buttonID) {
-            throw 'Websocket: buttonID field is not optional!';
-        }
-
-        let i = Xrd_Websocket_Names.indexOf(name);
-        if (i != -1) {
-            if (rsp) {
-                Xrd_Websockets[i].send(msg);
-                Xrd_Websockets[i].addEventListener('message', function (event) {
-                    //document.getElementById('websocket-messages').innerHTML = 'Received a message from ' + name + '.<br>Check ' + buttonID + '.' + rsp + ' for data.';
-                    SAMMI.setVariable(rsp, event.data, buttonID);
-                }, {once: true});
-            } else {
-                Xrd_Websockets[i].send(msg);
-            }
-        } else {
-            throw 'This websocket name: ' + name + ' does not exist! Cannot send message.';
-        }
-
-    } catch (e) {
-        SAMMI.alert(e);
-    }
-}
-
-function printAllConnections() {
-   let text = '';
-   for (i = 0; i < Xrd_Websocket_Names.length; i++) {
-       text = text + Xrd_Websocket_Names[i] + ' is Connected! <br>';
-   }
-   //document.getElementById('websocket-connections').innerHTML = text;
-}
-
-function websocketRemove(name) {
+function Xrd_RemoveWebsocket(name) {
     try {
         if (!name) {
             throw 'cannot remove websocket without a name!';
@@ -269,42 +213,13 @@ function websocketRemove(name) {
     }
 }
 
-function main() {
-    console.log("Extension connected to SAMMI Bridge");
-    //SAMMI.alert("Xturd.");
-	sammiclient.on('Guilty Gear Xrd Data', (payload) => {
-		
-        console.log("Command triggered", payload);
-        // get the button ID from the payload which SAMMI sent to the extension
-        const { FromButton }  = payload.Data 
-        // Get the value of the example extension box from the payload we set up earlier
-        const exampleBoxValue = payload.Data.exampleBox
-        // Here we can do something with the value, like append some text to it and send it back to SAMMI
-        const stateVariable = "A single frame of xrd";
-        // Send the modified value back to SAMMI by setting the variable value in the button that triggered the command
-        SAMMI.setVariable('stateUpdate', stateVariable, FromButton)
-        // We can also ask SAMMI to return the value of a variable from a button
-        SAMMI.getVariable('stateUpdate', FromButton).then((data) => {
-            console.log("Variable value returned from SAMMI", data.Value);
-        });
-    });
+function Xrd_Main() {
+    console.log("Xturd Extension connected to SAMMI Bridge");
+
 	sammiclient.on('Create Xrd Websocket', (payload) => {
 		//SAMMI.alert("Connecting to Xrd.");
-		websocketCreate(payload.Data.name, payload.Data.url, payload.Data.buttonID, payload.Data.status, payload.Data.error, payload.Data.msg);
+		Xrd_CreateWebsocket(payload.Data.name, payload.Data.url, payload.Data.buttonID, payload.Data.status, payload.Data.error, payload.Data.msg);
 		Xrd_Data = payload.Data.buttonID;
-	});
-	sammiclient.on('Remove Xrd Websocket', (payload) => {
-		//SAMMI.alert("Remove Xturd Websocket");
-		websocketRemove(payload.Data.name);
-	});
-	
-	sammiclient.on('Send Message To Xrd Websocket', (payload) => {
-		//SAMMI.alert("Send Message to Xturd Websocket");
-		websocketMessage(payload.Data.name, payload.Data.msg, payload.Data.rsp, payload.Data.buttonID);
-	});
-	
-	sammiclient.on('Print All Xrd Connections', (payload) => {
-		printAllConnections();
 	});
 	
 	sammiclient.on('Xrd Moveset Interpreter', (payload) => {
