@@ -24,7 +24,7 @@ Step 6 (Optional): Copy the text found in the Example Deck text file to your cli
 
 ### Accessing Events via Extension Triggers
 
-The following Extension Triggers are available for use. Add them to buttons via a button's Trigger menu. They all contain extremely relevant data within that can be accessed via the `Trigger Pull Button` command.
+The following Extension Triggers are available for use. Add them to buttons via a button's Trigger menu. They all contain extremely relevant data within that can be accessed via the `Trigger Pull Data` command.
 
 ![image](https://github.com/user-attachments/assets/d7188aa0-a8bd-4deb-ba54-eefd9f8d1fba)
 ![image](https://github.com/user-attachments/assets/264e2472-8218-4c34-95b8-6a53cf167d44)
@@ -40,9 +40,10 @@ The following Extension Triggers are available for use. Add them to buttons via 
 | `ggxrd_gamestateDeinitializedEvent` | Triggers when you leave a match or the application closes mid-match. |
 
 ### Example of Detecting Level 3 Mist Finer.
-This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger. The ggxrd_hitEvent trigger sends along it's own data object.
+This is in the Commands screen of a button set up with the `ggxrd_hitEvent` Extension Trigger. The ggxrd_hitEvent trigger sends along it's own data object that you access with `Trigger Pull Data`.
 
-![image](https://github.com/user-attachments/assets/50741a4c-6f03-4601-b677-6ed87b04acd5)
+![image](https://github.com/user-attachments/assets/6b9648ac-ce3d-48cf-8034-be4c6ced3f77)
+
 
 ## More Information
 
