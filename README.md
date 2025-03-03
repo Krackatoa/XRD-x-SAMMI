@@ -26,6 +26,9 @@ Step 6 (Optional): Copy the text found in the Example Deck text file to your cli
 
 The following Extension Triggers are available for use. Add them to buttons via a button's Trigger menu. They all contain extremely relevant data within that can be accessed via the `Trigger Pull Button` command.
 
+![image](https://github.com/user-attachments/assets/d7188aa0-a8bd-4deb-ba54-eefd9f8d1fba)
+![image](https://github.com/user-attachments/assets/264e2472-8218-4c34-95b8-6a53cf167d44)
+
 | Extension Trigger | Description |
 | --- | --- |
 | `ggxrd_stateUpdate`| Occurs once a frame. Contains all sorts of cool gamestate data. |
