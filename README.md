@@ -4,7 +4,9 @@ A Bridge Extension for [SAMMI](https://sammi.solutions). Take interactions in ga
 
 ## Extension Function
 
-This extension allows you to receive data from [ggxrd-mod](https://github.com/super-continent/ggxrd-mod) in the form of a button that fills with data at 60Hz, and Extension Triggers for individual, one-off events. It's currently separated into these two mechanisms for performance reasons. The data stream to the button may become an Extension Trigger of it's own at a later date.
+This extension allows you to receive data from [ggxrd-mod](https://github.com/super-continent/ggxrd-mod) in the form of Extension Triggers inside SAMMI. A collection of example buttons have been provided with some experimental functionality to get you started.
+
+![image](https://github.com/user-attachments/assets/c9cea94d-96bb-44ee-b8aa-9d4483e670a4)
 
 ## Quick Start Guide
 
