@@ -24,6 +24,13 @@ Step 6 (Optional): Copy the text found in the Example Deck text file to your cli
 
 ## Using the Mod
 
+### Important Notes
+
+#### >>> Run Bridge in a regular browser instead of the embedded OBS dock for better performance.
+
+Run SAMMI at >90FPS to stop button events from backing up. It's a SAMMI thing. This can affect commands like Motion, so if you need to animate things in OBS, I recommend the OBS Move plug-in.
+![image](https://github.com/user-attachments/assets/cf509d26-069f-4774-a1f2-543fade5d45a)
+
 ### Accessing Events via Extension Triggers
 
 The following Extension Triggers are available for use. Add them to buttons via a button's Trigger menu. They all contain extremely relevant data within that can be accessed via the `Trigger Pull Data` command.
