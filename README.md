@@ -26,9 +26,15 @@ Step 6 (Optional): Copy the text found in the Example Deck text file to your cli
 
 ### Important Notes
 
-#### >>> Run Bridge in a regular browser instead of the embedded OBS dock for better performance.
+#### Run Bridge in a regular browser instead of the embedded OBS dock for better performance.
 
-Run SAMMI at >90FPS to stop button events from backing up. It's a SAMMI thing. This can affect commands like Motion, so if you need to animate things in OBS, I recommend the OBS Move plug-in.
+Apparently, OBS can't handle our data. It's too much.
+
+![image](https://github.com/user-attachments/assets/725b68e5-4d28-4d03-a328-cb900052876d) ![image](https://github.com/user-attachments/assets/03d451bd-f7ec-4295-8640-03b6bd80eb48)
+
+#### Run SAMMI at framerates >60FPS to stop button events from backing up. 
+
+It's a SAMMI thing. This can affect commands like Motion, so if you need to animate things in OBS, I recommend the OBS Move plug-in.
 ![image](https://github.com/user-attachments/assets/cf509d26-069f-4774-a1f2-543fade5d45a)
 
 ### Accessing Events via Extension Triggers
